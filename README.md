@@ -24,12 +24,12 @@ In your project's Gruntfile, add a section named `remotefile` to the data object
 
 ```js
 grunt.initConfig({
-  remotefile: {
-    remote_file_task: {
-      url: '', // remote source url
-      dest: '' // local dest path
+    remotefile: {
+      remote_file_task: {
+        url: '', // remote source url
+        dest: '' // local dest path
+      },
     },
-  },
 })
 ```
 
@@ -37,17 +37,26 @@ grunt.initConfig({
 
 ```js
 grunt.initConfig({
-  remotefile: {
-    jquery: {
-        url:'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
-        dest:'dist/jquery.min.js'
+    remotefile: {
+      jquery: {
+          url:'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+          dest:'dist/jquery.min.js'
       },
-    "jquery-ui": {
-      url:'http://code.jquery.com/ui/1.10.2/jquery-ui.js',
-      dest:'dist/jquery-ui.min.js'
-    },
-  },
-})
+      "jquery_ui": {
+          url:'http://code.jquery.com/ui/1.10.2/jquery-ui.js',
+          dest:'dist/jquery-ui.min.js'
+      }
+    }
+    concat: {
+        dist: {
+            src: [
+                '<%= remotefile.jquery.dest %>',
+                '<%= remotefile.jquery_ui.dest %>'
+            ],
+            dest: 'dist/jquery_ui.merge.js'
+        }
+    }
+});
 ```
 
 ## Contributing
