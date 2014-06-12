@@ -28,6 +28,12 @@ module.exports = function(grunt) {
                     return true;
                 } else {
                     grunt.log.warn('Source file "' + src + '" not found.');
+                    // if dest exists already from a previous run, use as a backup and return true
+                    if (grunt.file.exists(f.dest)) {
+                        grunt.log.writeln('File dest exists: "' + f.dest + '" will be used as an offline backup.');
+                        done(true);
+                        return true;
+                    }
                     done(false);
                     return false;
                 }
